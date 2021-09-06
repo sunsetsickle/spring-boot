@@ -1,0 +1,43 @@
+#-------------------------服务器配置
+server:
+  #修改端口
+  port: 8080
+  servlet:
+    #上下文
+    context-path: /thymeleaf
+    encoding: #这三行配置就可以解决浏览器乱码问题
+      enabled: true
+      force: true
+      charset: utf-8
+  tomcat:
+    threads:
+      #最大线程数
+      max: 200
+      #最小空闲线程数
+      min-spare: 15
+    uri-encoding: utf-8
+
+#-------------------------spring配置  数据源
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true%26characterEncoding=UTF-8%26userSSL=false%26serverTimezone=GMT%2B8
+    username: root
+    password: root
+#-------------------------mybatis配置
+mybatis:
+  #SQL映射文件存放的位置
+  mapper-locations: classpath:com/liang/thymeleaf/mapper/*.xml
+  #别名
+  type-aliases-package: com.liang.thymeleaf.domain
+
+#-------------------------日志配置
+logging:
+  level:
+    root: info
+    com.liang: debug
